@@ -35,13 +35,7 @@ struct ContentView: View {
                     Button(action: {
                         self.flagTapped(index)
                     }) {
-                        Image(self.countries[index])
-                            .renderingMode(.original)
-                            .clipShape(Capsule())
-                            .overlay(
-                                Capsule()
-                                    .stroke(Color.black, lineWidth: 1))
-                            .shadow(radius: 2)
+                        FlagImage(named: self.countries[index])
                     }
                 }
                 
@@ -77,6 +71,24 @@ struct ContentView: View {
     func askQuestion() {
         countries.shuffle()
         correctAnswer = Int.random(in: 0...2)
+    }
+}
+
+struct FlagImage: View {
+    private let imageName: String
+
+    init(named imageName: String) {
+        self.imageName = imageName
+    }
+    
+    var body: some View {
+        Image(imageName)
+        .renderingMode(.original)
+        .clipShape(Capsule())
+        .overlay(
+            Capsule()
+                .stroke(Color.black, lineWidth: 1))
+        .shadow(radius: 2)
     }
 }
 
